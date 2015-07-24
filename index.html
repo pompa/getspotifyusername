@@ -1,0 +1,19 @@
+<p id="login"><a href="https://accounts.spotify.com/authorize?client_id=f8fdc166607949d4be1dfe6d6e005b6f&redirect_uri=http:%2F%2F10.48.25.34:8080%2F&callback&scope=user-read-private&response_type=token">Log In with Spotify</a></p>
+<p id="username"></p>
+<script type="text/javascript" src="spotify-web-api.js"></script>
+<script type="text/javascript">
+var token = window.location.hash.split('&')[0].replace('#access_token=', '');
+
+if (token) {
+	document.getElementById('login').remove();
+	var spotifyApi = new SpotifyWebApi();
+	spotifyApi.setAccessToken(token);
+	spotifyApi.getMe(function(err, data) {
+		var username = document.getElementById('username').innerHTML = data.id;
+	});;
+}
+</script>
+
+
+
+
